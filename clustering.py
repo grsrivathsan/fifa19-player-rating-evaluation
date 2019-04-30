@@ -125,5 +125,6 @@ class Clustering:
 		# self.k_means_plus_plus(self.skills,clusters)
 
 
-clustering = Clustering("./data_normalized.csv", "Id", 7)
+#clustering = Clustering("./data_normalized.csv", "Id", 7)
+clustering = Clustering("./data_normalizedSkills.csv", "Id", 7)
 # clustering.run_clustering()

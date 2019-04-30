@@ -55,8 +55,8 @@ class Clustering:
 
 		kmeanspp = KMeans(n_clusters=clusters, init='k-means++')
 		kmeanspp.fit(data)
-		print(kmeanspp.labels_)
-		print(set(kmeanspp.labels_))
+		#print(kmeanspp.labels_)
+		#print(set(kmeanspp.labels_))
 		return kmeanspp.labels_;
 
 
@@ -83,7 +83,12 @@ class Clustering:
 		if not clusters:
 			clusters = self.clusters
 
-		skills = self.data.loc[:, "Crossing":"GKReflexes"]
+		#skills = self.data.loc[:, "Crossing":"GKReflexes"]
+		skills = self.data[["GKReflexes","GKDiving"]]
+		print("skills")
+		print((skills))
+		# skills1 = self.data.loc[:,"Aggression"]
+		# skills2 = self.data.loc[:,"Jumping"]
 		#self.agglomerative(skills,clusters)
 		#self.k_means(skills,clusters)
 		kpplabels = self.k_means_plus_plus(skills,clusters)
@@ -133,14 +138,15 @@ def clusterAttr(cluster1,cluster2,cluster3,cluster4,list1,list2):
 	plotGraph(fc1, cluster1, fc2, cluster2, fc3, cluster3, fc4, cluster4,list1,list2);
 
 #clustering = Clustering("./data_normalized.csv","Id", 4)
-clustering = Clustering("E:/Courses/Semester2/Data Mining/Project/Datasets/data_normalizedSkills.csv","Id", 4)
+clustering = Clustering("E:/Courses/Semester2/Data Mining/Project/gitRepo/Data-Mining-Project/data_normalizedSkills.csv","Id", 4)
 kapplabels = clustering.run_clustering()
-print(kapplabels)
+print("KAppLables:",kapplabels)
+print("Uniq Kapp lables:",set(kapplabels))
+
+print("Here")
 data = clustering.extract_data();
 #print(data)
 id = data.index.tolist()
-
-print(type(id))
 
 #Add the player with id into the cluster
 cluster1 = []
@@ -161,7 +167,7 @@ for i in kapplabels:
 
 
 #print(len(cluster1),len(cluster2),len(cluster3),len(cluster4))
-print(cluster1)
+#print(cluster1)
 
 dribbleList = data["Dribbling"].tolist()
 bcList = data["BallControl"].tolist();
@@ -177,26 +183,29 @@ haList = data["HeadingAccuracy"].tolist()
 
 gkrList = data["GKReflexes"].tolist()
 gkdList = data["GKDiving"].tolist()
-#clusterAttr(cluster1,cluster2,cluster3,cluster4,gkrList,gkdList)
+clusterAttr(cluster1,cluster2,cluster3,cluster4,gkrList,gkdList)
 
 wageList = data["Wage"].tolist()
 OverallList = data["Overall"].tolist();
 
-ov1 = []
-ov2 = []
-ov3 = []
-ov4 = []
 
-for i in cluster1:
-	ov1.append(OverallList[i])
-for i in cluster2:
-	ov2.append(OverallList[i])
-for i in cluster3:
-	ov3.append(OverallList[i])
-for i in cluster4:
-	ov4.append(OverallList[i])
 
-print(min(ov1))
+# print("OV:")
+# ov1 = []
+# ov2 = []
+# ov3 = []
+# ov4 = []
+#
+# for i in cluster1:
+# 	ov1.append(OverallList[i])
+# for i in cluster2:
+# 	ov2.append(OverallList[i])
+# for i in cluster3:
+# 	ov3.append(OverallList[i])
+# for i in cluster4:
+# 	ov4.append(OverallList[i])
+#
+# print((ov1))
 
 # print(len(wageList))
 # print(len(OverallList))
